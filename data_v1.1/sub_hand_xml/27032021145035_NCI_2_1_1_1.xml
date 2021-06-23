@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>27032021145035_NCI_2_1_1_1.png</filename>
+	<path>/my-project-name/27032021145035_NCI_2_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>1072</width>
+		<height>980</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>317</xmin>
+			<ymin>298</ymin>
+			<xmax>465</xmax>
+			<ymax>461</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>480</xmin>
+			<ymin>308</ymin>
+			<xmax>728</xmax>
+			<ymax>459</ymax>
+		</bndbox>
+	</object>
+</annotation>

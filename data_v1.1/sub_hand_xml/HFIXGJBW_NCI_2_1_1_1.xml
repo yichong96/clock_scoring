@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>HFIXGJBW_NCI_2_1_1_1.png</filename>
+	<path>/my-project-name/HFIXGJBW_NCI_2_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>1116</width>
+		<height>1048</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>468</xmin>
+			<ymin>379</ymin>
+			<xmax>565</xmax>
+			<ymax>484</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>572</xmin>
+			<ymin>248</ymin>
+			<xmax>789</xmax>
+			<ymax>484</ymax>
+		</bndbox>
+	</object>
+</annotation>

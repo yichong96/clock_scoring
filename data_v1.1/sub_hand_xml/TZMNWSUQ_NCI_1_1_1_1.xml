@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>TZMNWSUQ_NCI_1_1_1_1.png</filename>
+	<path>/my-project-name/TZMNWSUQ_NCI_1_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>478</width>
+		<height>456</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>152</xmin>
+			<ymin>148</ymin>
+			<xmax>204</xmax>
+			<ymax>231</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>232</xmin>
+			<ymin>131</ymin>
+			<xmax>328</xmax>
+			<ymax>217</ymax>
+		</bndbox>
+	</object>
+</annotation>

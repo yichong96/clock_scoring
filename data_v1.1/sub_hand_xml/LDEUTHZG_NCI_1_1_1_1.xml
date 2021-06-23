@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>LDEUTHZG_NCI_1_1_1_1.png</filename>
+	<path>/my-project-name/LDEUTHZG_NCI_1_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>420</width>
+		<height>448</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>152</xmin>
+			<ymin>167</ymin>
+			<xmax>190</xmax>
+			<ymax>232</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>197</xmin>
+			<ymin>157</ymin>
+			<xmax>284</xmax>
+			<ymax>231</ymax>
+		</bndbox>
+	</object>
+</annotation>

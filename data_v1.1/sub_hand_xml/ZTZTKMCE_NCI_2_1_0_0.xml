@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>ZTZTKMCE_NCI_2_1_0_0.png</filename>
+	<path>/my-project-name/ZTZTKMCE_NCI_2_1_0_0.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>858</width>
+		<height>868</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>254</xmin>
+			<ymin>153</ymin>
+			<xmax>375</xmax>
+			<ymax>329</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>420</xmin>
+			<ymin>263</ymin>
+			<xmax>643</xmax>
+			<ymax>379</ymax>
+		</bndbox>
+	</object>
+</annotation>
