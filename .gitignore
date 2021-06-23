@@ -1,0 +1,4 @@
+*.pt
+.DS_STORE
+archive/
+.ipynb_checkpoints/
