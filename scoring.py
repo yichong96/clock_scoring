@@ -180,8 +180,10 @@ def score_hand(class_dct, image, time, im_draw=False):
 	tail_mid_x, tail_mid_y = (long_tail_x + short_tail_x) // 2, (long_tail_y + short_tail_y) // 2
 
 	if im_draw:
-		draw.point([(tail_mid_x, tail_mid_y)], fill='blue')
-		draw.point([(contour_mid_x, contour_mid_y)], fill='red')
+		draw.line([(tail_mid_x - 10, tail_mid_y + 10), (tail_mid_x + 10, tail_mid_y - 10)], fill='green', width=3)
+		draw.line([(tail_mid_x - 10, tail_mid_y - 10), (tail_mid_x + 10, tail_mid_y + 10)], fill='green', width=3)
+		draw.line([(contour_mid_x - 10, contour_mid_y + 10), (contour_mid_x + 10, contour_mid_y - 10)], fill='red', width=3)
+		draw.line([(contour_mid_x - 10, contour_mid_y - 10), (contour_mid_x + 10, contour_mid_y + 10)], fill='red', width=3)
 		draw.rectangle([contour_mid_x - (HAND_X_WIDTH // 2), contour_mid_y - (HAND_Y_HEIGHT // 2),
 			contour_mid_x + (HAND_X_WIDTH // 2), contour_mid_y + (HAND_Y_HEIGHT // 2)], outline='red')
 	nearest_digit_long_arrow, nearest_digit_short_arrow = min(long_digit_dist, key=long_digit_dist.get), \
