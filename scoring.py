@@ -60,7 +60,7 @@ def get_arrow_coords(arrow_obj, arrow_bbox):
 		top_left_y = arrow_bbox['y1']
 		tail_x = arrow_bbox['x2']
 		tail_y = arrow_bbox['y2']
-		return top_left_x, top_left_x, tail_x, tail_y
+		return top_left_x, top_left_y, tail_x, tail_y
 	elif arrow_obj == Classes.TOP_RIGHT_ARROW:
 		top_right_x = arrow_bbox['x2']
 		top_right_y = arrow_bbox['y1']
@@ -131,7 +131,7 @@ def score_hand(class_dct, image, time, im_draw=False):
 	else:
 		minute = minute // 5
 
-	one_clock_hand = list(classes_dct.keys()).count(Classes.HAND) == 1
+	one_clock_hand = list(class_dct.keys()).count(Classes.HAND) == 1
 	correct_sub_hands = sum(i.value > 14 for i in class_dct.keys()) == 2
 
 	if not one_clock_hand or not correct_sub_hands:
@@ -188,13 +188,23 @@ def score_hand(class_dct, image, time, im_draw=False):
 		min(short_digit_dist, key=short_digit_dist.get)
 	#print(nearest_digit_long_arrow)
 	#print(nearest_digit_short_arrow)
+	if (not contour_mid_x - (HAND_X_WIDTH // 2) < tail_mid_x < contour_mid_x + (HAND_X_WIDTH // 2) or \
+			not contour_mid_y - (HAND_Y_HEIGHT // 2) < tail_mid_y < contour_mid_y + (HAND_Y_HEIGHT // 2)):
+		return 0, "hand not centered"
+
 	if im_draw:
+		bbox_long_arrow, bbox_short_arrow = class_dct[long_arrow_cls], class_dct[short_arrow_cls]
+		draw.rectangle(list(bbox_long_arrow.values()), outline='red')
+		draw.rectangle(list(bbox_short_arrow.values()), outline='red')
 		draw.line([digits_center_pos[nearest_digit_long_arrow],
 			(long_head_x, long_head_y)], fill='green', width=2)
 		draw.line([digits_center_pos[nearest_digit_short_arrow],
 			(short_head_x, short_head_y)], fill='green', width=2)
-	if nearest_digit_long_arrow == minute and nearest_digit_short_arrow == hour:
+
+	if nearest_digit_long_arrow.value == minute and nearest_digit_short_arrow.value == hour:
 		return 1, "passed"
+	else:
+		return 0, "long hand or short hand not pointing to correct digit"
 
 def compute_angle(vec1, vec2):
 	dot_prod = vec1[0] * vec2[0] + vec1[1] * vec2[1]
@@ -241,11 +251,24 @@ def score_digits(class_dct, image, im_draw = False):
 		return 0, msg
 	return 1, "passed check"
 
+def add_contour(class_dct):
+	# get all bboxes of digits
+	digit_bboxes = [list(class_dct[cls].values()) for cls in class_dct if cls.value < 12]
+	# find xmin,ymin,xmax,ymax
+	xmin = min(list(map(lambda x: x[0], digit_bboxes)))
+	xmax = max(list(map(lambda x: x[2], digit_bboxes)))
+	ymin = min(list(map(lambda x: x[1], digit_bboxes)))
+	ymax = max(list(map(lambda x: x[3], digit_bboxes)))
+
+	# add contour
+	class_dct[Classes.CONTOUR] = {'x1': xmin, 'y1': ymin, 'x2': xmax, 'y2' : ymax}
+
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--prediction_path", type=str, required=True, help="prediction file to score drawings")
-	parser.add_argument("--test_images", type=str, help="dir to test images", default = "./test/test_images")
+	parser.add_argument("--test_images", type=str, help="dir to test images", default = "./data_v1.1/test/test_images")
 	parser.add_argument("--hour", type=int, default=11)
+	parser.add_argument("--im_draw", action='store_true', default=False)
 	parser.add_argument("--minute", type=int, default =10)
 	args = parser.parse_args()
 
@@ -267,10 +290,19 @@ if __name__ == "__main__":
 		# convert csv into dictionary format
 		class_dct = convert(im_pred_df)
 		classes_pred = list(class_dct.keys())
-		hasContour = (sum(i == 13 for i in classes_pred) == 1)
+		hasContour = Classes.CONTOUR in class_dct
 		if hasContour:
 			im_score["contour"] = 1
-		hand_score, err_hand_msg = score_hand(class_dct, image, time, im_draw=True)
+
+		if not hasContour:
+			add_contour(class_dct)
 		digit_score, err_digit_msg = score_digits(class_dct, image)
+		# add in virtual contour, if digits are well positioned and scored.
+		hand_score, err_hand_msg = score_hand(class_dct, image, time, im_draw=args.im_draw)
 		im_score['hand'] = hand_score
 		im_score['digit'] = digit_score
+		print("contour : {}, digit: {}, hand: {}".format(im_score['contour'], digit_score, hand_score))
+		print("error msg digit: {}, error msg hand: {}".format(err_digit_msg, err_hand_msg))
+		if args.im_draw:
+			plt.imshow(image)
+			plt.show()

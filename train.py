@@ -16,6 +16,7 @@ from ray.tune.schedulers import ASHAScheduler
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 import sys
 import math
+from image_augment import ImageAugmentGenerator
 # classes to detect: Digits 1 - 12
 # contour, hand of clock. 13, 14
 # [{k:v for k,v in t.items()} for t in targets]. t = {'boxes': [list of list], 'labels': [list of id], 'image_id': [list of id]}
@@ -40,6 +41,7 @@ class ClockDataset(object):
     obj_details = self.csv_data[self.csv_data['filename'] == filename]
     boxes = []
     labels = []
+
     for _, row in obj_details.iterrows():
       im_width = row['width']
       im_height = row['height']
@@ -52,6 +54,9 @@ class ClockDataset(object):
       label = self.label_encoder[row['class']]
       boxes.append([xmin, ymin, xmax, ymax])
       labels.append(label)
+
+    # image augment returns transformed image and updated bboxes. Takes in [[list: boxes]], [labels] and image
+    # im, obj_details = ImageAugment.transform(im, obj_details). returns image and bbox updated
 
     boxes = torch.as_tensor(boxes, dtype=torch.float32)
     labels = torch.as_tensor(labels, dtype=torch.int64)
@@ -82,7 +87,7 @@ def mixup_data(images, targets, device, mixup_ratio=0.5):
   targets = np.array(targets)
   index_list = index.tolist()
   targets_ = targets[index_list]
-  
+
   for target, pair_target in zip(targets, targets_):
     target['boxes'] = torch.cat((target['boxes'], pair_target['boxes']))
     target['labels'] = torch.cat((target['labels'], pair_target['labels']))
@@ -131,11 +136,11 @@ def eval(model, dataloader_test, device):
 
   # coco metric
   mAP = 0
-  ious = np.arange(0.5, 0.95, 0.05)
+  ious = np.arange(0.8, 0.95, 0.05)
   for iou_threshold in ious:
-    AP = mean_average_precision(prediction_boxes, ground_truth_boxes, iou_threshold, num_classes = 14)
+    AP = mean_average_precision(prediction_boxes, ground_truth_boxes, iou_threshold, num_classes = 22)
     mAP += AP
-  mAP = mAP / 10
+  mAP = mAP / len(ious)
   return sum(val_losses) / len(val_losses), mAP, prediction_boxes
 
 def save_predictions(prediction_boxes, save_path, im_test_id_name_map):
@@ -145,15 +150,33 @@ def save_predictions(prediction_boxes, save_path, im_test_id_name_map):
   df = pd.DataFrame(prediction_boxes, columns=columns)
   df.to_csv(save_path, index=False)
 
-def train(model, optimizer, data_loader, train_losses, device, mixup):
+def train(model, optimizer, data_loader, train_losses, device, mixup, image_augment_generator, transform):
   model.train()
   for step, (images, targets) in enumerate(data_loader):
+    # batch_size = len(images)
+    # fig,ax = plt.subplots(2, batch_size)
+    # for j, (original_im, original_target) in enumerate(zip(images, targets)):
+    #     ax[0, j].imshow(original_im)
+
+    if image_augment_generator:
+        images, targets = image_augment_generator.transform_images(images, targets)
+
+    # for j, (original_im, original_target) in enumerate(zip(images, targets)):
+    #     ax[1, j].imshow(original_im)
+
+    images = list(map(lambda x: transform(x), images))
     images = list(image.to(device) for image in images)
     targets = [{k: v.to(device) for k,v in t.items()} for t in targets]
 
+
+    # apply augmentation to batch of data
+    # images, targets = image_augmentator.transform(images, targets)    # tensors
     if mixup:
       images, targets = mixup_data(images, targets, device)
-      
+    #   for j, (original_im, original_target) in enumerate(zip(images, targets)):
+    #     ax[j].imshow(original_im.permute(1,2,0))
+    # plt.show()
+
     loss_dict = model(images, targets)
     losses = sum(loss for loss in loss_dict.values())
     if mixup:
@@ -188,7 +211,7 @@ def test_model(predictions_path, retina_net, best_trial=None, tune=False, model_
     model_state, optimizer_state = torch.load(checkpoint_path)
   else:
     assert (model_save_path != None)
-    model_state = torch.load(model_save_path)  
+    model_state = torch.load(model_save_path)
 
   best_trained_model.load_state_dict(model_state)
   best_trained_model.to(device)
@@ -202,7 +225,7 @@ def test_model(predictions_path, retina_net, best_trial=None, tune=False, model_
 def prepare_inputs(args):
   train_metadata = pd.read_csv(args.train_csv_path)
   test_metadata = pd.read_csv(args.test_csv_path)
-  label_encoder = {"1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "11":11, "12":12, "contour":13, "hand":14, "top_left_arrow":15, "top_right_arrow": 16, "right_arrow": 17, "left_arrow": 18, "up_arrow": 19, "down_arrow": 20, "bottom_right_arrow":21}
+  label_encoder = {"1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "11":11, "12":12, "contour":13, "hand":14, "top_left_arrow":15, "top_right_arrow": 16, "right_arrow": 17, "left_arrow": 18, "up_arrow": 19, "down_arrow": 20, "bottom_right_arrow":21, "bottom_left_arrow": 22}
 
   # load data
   im_train_name_id_map = {}  # 0: image1, 1: image2
@@ -272,21 +295,21 @@ def prepare_inputs(args):
         im_train_name_id_map, im_train_id_name_map, im_val_name_id_map, \
         im_val_id_name_map, im_test_name_id_map, im_test_id_name_map
 
-def get_model(retina_net): 
-  num_classes = 22  # 21 + background
-  if retina_net: 
+def get_model(retina_net):
+  num_classes = 23  # 22 + background
+  if retina_net:
     model = torchvision.models.detection.retinanet_resnet50_fpn(pretrained=True)
-    # replace classification layer 
+    # replace classification layer
     out_channels = model.head.classification_head.conv[0].in_channels
-    num_anchors = model.head.classification_head.num_anchors  
+    num_anchors = model.head.classification_head.num_anchors
     model.head.classification_head.num_classes = num_classes
     cls_logits = torch.nn.Conv2d(out_channels, num_anchors * num_classes, kernel_size = 3, stride=1, padding=1)
     torch.nn.init.normal_(cls_logits.weight, std=0.01)  # as per pytorch code
-    torch.nn.init.constant_(cls_logits.bias, -math.log((1 - 0.01) / 0.01))  # as per pytorcch code 
+    torch.nn.init.constant_(cls_logits.bias, -math.log((1 - 0.01) / 0.01))  # as per pytorcch code
     # assign cls head to model
     model.head.classification_head.cls_logits = cls_logits
   else:
-    model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True) 
+    model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
     # input features for classifier
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     # replace pretrained head
@@ -294,7 +317,7 @@ def get_model(retina_net):
   return model
 
 def save_checkpoint(model, optimizer, tune, checkpoint_dir):
-  if tune: 
+  if tune:
     with tune.checkpoint_dir(step=epoch) as checkpoint_dir:
       path = os.path.join(checkpoint_dir, "checkpoint")
       torch.save(
@@ -319,19 +342,20 @@ def train_detector(config, checkpoint_dir=None, params=None):
   resize_width = params['resize_width']
   resize_height = params['resize_height']
   model_save_path = params['model_save_path']
+  augment_data = params['augment_data']
   model = get_model(params['retina_net'])
 
   params = [p for p in model.parameters() if p.requires_grad]
 
   optimizer = torch.optim.SGD(params, lr=config['lr'], momentum=config['momentum'], weight_decay=config['weight_decay'])
-  scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, num_epochs) 
+  scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, num_epochs)
   # transformation. Internally standardise with mean and std already
   transform = torchvision.transforms.Compose([
     torchvision.transforms.ToTensor()
   ])
 
   # load dataset
-  dataset = ClockDataset(train_metadata, train_img_list, transform, im_train_name_id_map, label_encoder, resize_width, resize_height)
+  dataset = ClockDataset(train_metadata, train_img_list, None, im_train_name_id_map, label_encoder, resize_width, resize_height)
   dataset_val = ClockDataset(val_metadata, val_img_list, transform, im_val_name_id_map, label_encoder, resize_width, resize_height)
 
   # define dataloader
@@ -341,9 +365,13 @@ def train_detector(config, checkpoint_dir=None, params=None):
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
   model.to(device)
 
+  image_augment_generator = None
+  if augment_data:
+    image_augment_generator = ImageAugmentGenerator()
+
   train_losses = []  # average loss over all training steps
   for epoch in range(1, num_epochs + 1):
-    avg_train_loss = train(model, optimizer, data_loader, train_losses, device, mixup)
+    avg_train_loss = train(model, optimizer, data_loader, train_losses, device, mixup, image_augment_generator, transform)
     avg_val_loss, mAP, prediction_boxes = eval(model, data_loader_val, device)
     print("epoch: {}; Average Train Loss: {:5f}; Average Val Loss: {:5f}; Mean Average Precision: {:5f}"
       .format(epoch, avg_train_loss, avg_val_loss, mAP))
@@ -355,15 +383,15 @@ def train_detector(config, checkpoint_dir=None, params=None):
     if tune:
       tune.report(mAP = mAP.item(), loss = avg_val_loss)
 
-  if model_save_path and not args.tune:  
+  if model_save_path and not args.tune:
     torch.save(model.state_dict(), model_save_path)
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
-  parser.add_argument("--train_im_path", type=str, default="./data/train/train_images")
-  parser.add_argument("--train_csv_path", type=str, default="./data/train_labels.csv")
-  parser.add_argument("--test_im_path", type=str, default="./data/test/test_images")
-  parser.add_argument("--test_csv_path", type=str, default="./data/test_labels.csv")
+  parser.add_argument("--train_im_path", type=str, default="./data_v1.1/train/train_images")
+  parser.add_argument("--train_csv_path", type=str, default="./data_v1.1/train_labels.csv")
+  parser.add_argument("--test_im_path", type=str, default="./data_v1.1/test/test_images")
+  parser.add_argument("--test_csv_path", type=str, default="./data_v1.1/test_labels.csv")
   parser.add_argument("--save_pred_path", type=str, default="./predictions.csv")
   parser.add_argument("--model_save_path", type=str, help="Not required. Only when you want to save model")
   parser.add_argument("--seed", type=int, default=0)
@@ -381,6 +409,7 @@ if __name__ == "__main__":
   parser.add_argument("--momentum", type=float, help="custom momentum. Provide when not in tune mode")
   parser.add_argument("--weight_decay", type=float, help="custom weight decay. Provide when not in tune mode")
   parser.add_argument("--batch_size", type=int, help="custom batch size. Provide when not in tune mode")
+  parser.add_argument("--augment_data", action='store_true', default=False)
   args = parser.parse_args()
 
 
@@ -410,6 +439,7 @@ if __name__ == "__main__":
   params['num_epochs'] = args.num_epochs
   params['tune'] = args.tune
   params['model_save_path'] = args.model_save_path
+  params['augment_data'] = args.augment_data
   if args.tune:
     config = {
           "momentum": tune.uniform(0.1, 0.9),

@@ -3,7 +3,7 @@ import torch
 from collections import Counter
 
 def mean_average_precision(
-        pred_boxes, true_boxes, iou_threshold=0.5, num_classes=14
+        pred_boxes, true_boxes, iou_threshold=0.5, num_classes=22
 ):
     # pred_boxes (list): [[train_idx, class_pred, prob_score, x1, y1, x2, y2], ...]
     average_precisions = []
