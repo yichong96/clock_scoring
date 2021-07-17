@@ -60,3 +60,9 @@ One point is allocated for each of the following three criteria:
 
 `LONG_SHORT_THRESH` : The distance measured in pixels of the threshold for long and short hands to be considered 'distinct'.
 
+## References 
+- [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244)
+- [Tune: Scalable Hyperparameter Tuning](https://docs.ray.io/en/master/tune/index.html)
+- [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/abs/1506.01497)
+- [IOS-demo app in pytorch D2GO](https://github.com/pytorch/ios-demo-app/tree/master/D2Go)
+- [mixup: Beyond Empirical Risk Minimization](https://arxiv.org/abs/1710.09412)
