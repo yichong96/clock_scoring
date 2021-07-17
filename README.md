@@ -2,7 +2,7 @@
 
 ## Introduction
 This repository contains an IOS demo app under the `clockscoring` folder and development codes under `python` folder. Model development is done using Pytorch 1.9.0 
-and torchvision 0.10.0. The model used in the demo app is a quantised Faster RCNN using mobilenet V3 backbone. Model inference on a IOS device takes around ~4s and
+and torchvision 0.10.0. The model used in the demo app is a quantised (backbone) Faster RCNN using mobilenet V3 backbone. Model inference on a IOS device takes around ~4s and
 achieving a Mean Average Precision score of (70.44 mAP points) at IOU(0.8:0.95:0.05). Examples of the app workflow as shown below on an ipad simulator device. Clock
 images screenshots are graded based on the time 11:10.
 
@@ -31,7 +31,7 @@ open clockscoring.xcworkspace/
 `pod install` will install libtorch and libtorchvision dependencies into the project.
 
 ## Build model
-To build mobilenet v3 model from python, run the following commands. 
+To build the quantised mobilenet v3 model from python, run the following commands. 
 ```
 cd python
 python train_mobilenetV3.py --num_epochs 30 --lr 0.01 --momentum 0.9 --weight_decay 0.0005 --batch_size 8 
