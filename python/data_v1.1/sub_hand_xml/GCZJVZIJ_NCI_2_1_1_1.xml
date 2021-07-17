@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>GCZJVZIJ_NCI_2_1_1_1.png</filename>
+	<path>/my-project-name/GCZJVZIJ_NCI_2_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>1134</width>
+		<height>1032</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>455</xmin>
+			<ymin>361</ymin>
+			<xmax>543</xmax>
+			<ymax>547</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>558</xmin>
+			<ymin>335</ymin>
+			<xmax>827</xmax>
+			<ymax>568</ymax>
+		</bndbox>
+	</object>
+</annotation>

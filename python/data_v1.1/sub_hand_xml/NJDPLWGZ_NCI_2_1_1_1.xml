@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>NJDPLWGZ_NCI_2_1_1_1.png</filename>
+	<path>/my-project-name/NJDPLWGZ_NCI_2_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>718</width>
+		<height>676</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>288</xmin>
+			<ymin>221</ymin>
+			<xmax>353</xmax>
+			<ymax>324</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>356</xmin>
+			<ymin>208</ymin>
+			<xmax>501</xmax>
+			<ymax>324</ymax>
+		</bndbox>
+	</object>
+</annotation>

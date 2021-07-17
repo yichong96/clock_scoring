@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>WXTPQYJA_NCI_1_1_0_0.png</filename>
+	<path>/my-project-name/WXTPQYJA_NCI_1_1_0_0.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>378</width>
+		<height>408</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>132</xmin>
+			<ymin>155</ymin>
+			<xmax>181</xmax>
+			<ymax>198</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>down_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>163</xmin>
+			<ymin>185</ymin>
+			<xmax>203</xmax>
+			<ymax>280</ymax>
+		</bndbox>
+	</object>
+</annotation>

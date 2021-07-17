@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>LTASUGJK_NCI_1_1_1_0.png</filename>
+	<path>/my-project-name/LTASUGJK_NCI_1_1_1_0.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>444</width>
+		<height>378</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>166</xmin>
+			<ymin>149</ymin>
+			<xmax>210</xmax>
+			<ymax>177</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>95</xmin>
+			<ymin>161</ymin>
+			<xmax>219</xmax>
+			<ymax>187</ymax>
+		</bndbox>
+	</object>
+</annotation>

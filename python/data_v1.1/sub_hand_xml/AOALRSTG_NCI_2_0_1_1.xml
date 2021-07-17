@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>AOALRSTG_NCI_2_0_1_1.png</filename>
+	<path>/my-project-name/AOALRSTG_NCI_2_0_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>610</width>
+		<height>628</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>253</xmin>
+			<ymin>179</ymin>
+			<xmax>293</xmax>
+			<ymax>260</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>292</xmin>
+			<ymin>188</ymin>
+			<xmax>448</xmax>
+			<ymax>265</ymax>
+		</bndbox>
+	</object>
+</annotation>

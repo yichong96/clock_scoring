@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>27032021140152_MiD_1_1_1_0.png</filename>
+	<path>/my-project-name/27032021140152_MiD_1_1_1_0.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>494</width>
+		<height>492</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>137</xmin>
+			<ymin>233</ymin>
+			<xmax>220</xmax>
+			<ymax>261</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>229</xmin>
+			<ymin>161</ymin>
+			<xmax>349</xmax>
+			<ymax>256</ymax>
+		</bndbox>
+	</object>
+</annotation>

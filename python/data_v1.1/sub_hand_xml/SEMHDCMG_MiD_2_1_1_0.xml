@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>SEMHDCMG_MiD_2_1_1_0.png</filename>
+	<path>/my-project-name/SEMHDCMG_MiD_2_1_1_0.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>820</width>
+		<height>738</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>244</xmin>
+			<ymin>216</ymin>
+			<xmax>424</xmax>
+			<ymax>343</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>417</xmin>
+			<ymin>204</ymin>
+			<xmax>580</xmax>
+			<ymax>345</ymax>
+		</bndbox>
+	</object>
+</annotation>

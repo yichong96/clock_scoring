@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>OAXBNGSA_NCI_1_1_1_1.png</filename>
+	<path>/my-project-name/OAXBNGSA_NCI_1_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>414</width>
+		<height>392</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>127</xmin>
+			<ymin>113</ymin>
+			<xmax>188</xmax>
+			<ymax>184</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>192</xmin>
+			<ymin>105</ymin>
+			<xmax>296</xmax>
+			<ymax>182</ymax>
+		</bndbox>
+	</object>
+</annotation>
