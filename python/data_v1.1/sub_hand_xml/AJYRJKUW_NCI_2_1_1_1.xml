@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>AJYRJKUW_NCI_2_1_1_1.png</filename>
+	<path>/my-project-name/AJYRJKUW_NCI_2_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>928</width>
+		<height>876</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>255</xmin>
+			<ymin>292</ymin>
+			<xmax>402</xmax>
+			<ymax>501</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>393</xmin>
+			<ymin>277</ymin>
+			<xmax>691</xmax>
+			<ymax>507</ymax>
+		</bndbox>
+	</object>
+</annotation>

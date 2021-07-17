@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>UUGRPWGH_NCI_1_1_1_1.png</filename>
+	<path>/my-project-name/UUGRPWGH_NCI_1_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>480</width>
+		<height>442</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>161</xmin>
+			<ymin>165</ymin>
+			<xmax>212</xmax>
+			<ymax>221</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>216</xmin>
+			<ymin>151</ymin>
+			<xmax>301</xmax>
+			<ymax>225</ymax>
+		</bndbox>
+	</object>
+</annotation>

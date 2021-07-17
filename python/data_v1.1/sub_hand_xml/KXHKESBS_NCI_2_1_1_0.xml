@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>KXHKESBS_NCI_2_1_1_0.png</filename>
+	<path>/my-project-name/KXHKESBS_NCI_2_1_1_0.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>838</width>
+		<height>700</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>240</xmin>
+			<ymin>291</ymin>
+			<xmax>408</xmax>
+			<ymax>349</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>341</xmin>
+			<ymin>231</ymin>
+			<xmax>404</xmax>
+			<ymax>332</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>VSTGQYFO_NCI_2_1_1_1.png</filename>
+	<path>/my-project-name/VSTGQYFO_NCI_2_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>814</width>
+		<height>918</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>337</xmin>
+			<ymin>326</ymin>
+			<xmax>418</xmax>
+			<ymax>436</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>418</xmin>
+			<ymin>340</ymin>
+			<xmax>628</xmax>
+			<ymax>435</ymax>
+		</bndbox>
+	</object>
+</annotation>

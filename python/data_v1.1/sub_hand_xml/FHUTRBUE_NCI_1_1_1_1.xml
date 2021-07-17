@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>FHUTRBUE_NCI_1_1_1_1.png</filename>
+	<path>/my-project-name/FHUTRBUE_NCI_1_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>382</width>
+		<height>408</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>140</xmin>
+			<ymin>164</ymin>
+			<xmax>165</xmax>
+			<ymax>202</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>172</xmin>
+			<ymin>162</ymin>
+			<xmax>250</xmax>
+			<ymax>206</ymax>
+		</bndbox>
+	</object>
+</annotation>

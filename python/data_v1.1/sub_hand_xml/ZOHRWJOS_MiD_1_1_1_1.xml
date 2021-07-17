@@ -1,0 +1,37 @@
+<annotation>
+	<folder>my-project-name</folder>
+	<filename>ZOHRWJOS_MiD_1_1_1_1.png</filename>
+	<path>/my-project-name/ZOHRWJOS_MiD_1_1_1_1.png</path>
+	<source>
+		<database>Unspecified</database>
+	</source>
+	<size>
+		<width>350</width>
+		<height>316</height>
+		<depth>3</depth>
+	</size>
+	<object>
+		<name>top_left_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>117</xmin>
+			<ymin>93</ymin>
+			<xmax>148</xmax>
+			<ymax>133</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>top_right_arrow</name>
+		<pose>Unspecified</pose>
+		<truncated>Unspecified</truncated>
+		<difficult>Unspecified</difficult>
+		<bndbox>
+			<xmin>172</xmin>
+			<ymin>111</ymin>
+			<xmax>251</xmax>
+			<ymax>141</ymax>
+		</bndbox>
+	</object>
+</annotation>
