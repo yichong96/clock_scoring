@@ -43,11 +43,14 @@ class Scoring {
         var scores = [String : Int]()
         var contourScore = 0, digitScore = 0, handScore = 0
         var errorDigitMsg = "", errorHandMsg = ""
-        let classDct = convert(predictions: predictions)
+        var classDct = convert(predictions: predictions)
         let hasContour = Array(classDct.keys).contains(CLASSES.CONTOUR)
         if hasContour {
             contourScore = 1
+        } else {
+            classDct = addContour(classDct: classDct)
         }
+        
         (digitScore, errorDigitMsg) = scoreDigits(classDct: classDct)
         (handScore, errorHandMsg) = scoreHand(classDct: classDct, time: time)
         scores["contour"] = contourScore; scores["digit"] = digitScore; scores["hand"] = handScore
@@ -303,7 +306,7 @@ class Scoring {
         
         let xmin = filteredBbox.map(mapX1).min()!
         let xmax = filteredBbox.map(mapX2).max()!
-        let ymin = filteredBbox.map(mapY1).max()!
+        let ymin = filteredBbox.map(mapY1).min()!
         let ymax = filteredBbox.map(mapY2).max()!
         
         newDict[CLASSES.CONTOUR] = BoundingBox(x1: xmin, y1: ymin, x2: xmax, y2: ymax)
