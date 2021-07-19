@@ -147,6 +147,7 @@ class Scoring {
     private static func scoreDigits(classDct : Dictionary<CLASSES, BoundingBox>) -> (Int, String) {
         var msg = ""
         var digits = classDct.keys.filter{$0.rawValue < 13}
+        print(digits)
         if digits.count != 12 {
             msg = "did not detect all 12 digits"
             return (0, msg)

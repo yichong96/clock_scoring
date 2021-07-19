@@ -43,6 +43,7 @@ struct DrawingView : View {
                 return
             }
             let predictions = PrePostProcessor.outputsToPredictions(outputs: outputs, imgScaleX: 1.0, imgScaleY: 1.0)
+            print(predictions)
             var time = [String : Int]()
             time["minute"] = 10
             time["hour"] = 11
